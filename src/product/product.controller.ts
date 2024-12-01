@@ -1,18 +1,19 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { ProductService } from './product.service';
+import { Product } from './schemas/product.schema';
+import { CreateProductDto } from './dto/create-product.dto';
 
 @Controller('product')
 export class ProductController {
-  constructor() {}
+  constructor(private productService: ProductService) {}
 
   @Get('/')
-  getAllProducts() {
-    // Implement logic to fetch all products from your database
-    return 'All Products';
+  getAllProducts(): Promise<Product[]> {
+    return this.productService.getAllProducts();
   }
 
   @Post('/')
-  createProduct() {
-    // Implement logic to create a new product in your database
-    return 'Product created successfully';
+  createProduct(@Body() sanitizedInputs: CreateProductDto) {
+    return this.productService.createProduct(sanitizedInputs);
   }
 }
