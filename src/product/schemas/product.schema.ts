@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Category } from '../../category/schemas/category.schema';
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, versionKey: false })
 export class Product {
   @Prop({ required: true })
   name: string;
@@ -24,7 +24,7 @@ export class Product {
   })
   category: Category;
 
-  @Prop({ required: true })
+  @Prop({ required: true, default: true })
   status: boolean;
 }
 
