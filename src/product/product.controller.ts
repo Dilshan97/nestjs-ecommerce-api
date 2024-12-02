@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './schemas/product.schema';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -15,5 +15,15 @@ export class ProductController {
   @Post('/')
   createProduct(@Body() sanitizedInputs: CreateProductDto) {
     return this.productService.createProduct(sanitizedInputs);
+  }
+
+  @Get('/:productId')
+  getProductById(@Param('productId') productId: string) {
+    return this.productService.getProductById(productId);
+  }
+
+  @Delete('/:productId')
+  deleteProduct(@Param('productId') productId: string) {
+    return this.productService.deleteProduct(productId);
   }
 }
