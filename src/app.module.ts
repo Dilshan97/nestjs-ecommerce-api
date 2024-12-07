@@ -11,6 +11,9 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
+import { UserModule } from './user/user.module';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [
@@ -18,8 +21,9 @@ import { ProductModule } from './product/product.module';
     MongooseModule.forRoot(process.env.MONGO_BASE_URL),
     CategoryModule,
     ProductModule,
+    UserModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, AuthController],
+  providers: [AppService, AuthService],
 })
 export class AppModule {}
